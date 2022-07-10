@@ -136,16 +136,10 @@ class Checker(Generic[T], ConfigurableModule):
 
             def check(self, text) -> Optional[str]:
                 """Should return some description (or an empty string) on success, otherwise return None"""
-                if type(text) not in expected:
-                    return None
-                else:
-                    return self._base.check(text)
+                return None if type(text) not in expected else self._base.check(text)
 
             def getExpectedRuntime(self, text) -> float:
-                if type(text) not in expected:
-                    return 0
-                else:
-                    return self._base.getExpectedRuntime(text)
+                return 0 if type(text) not in expected else self._base.getExpectedRuntime(text)
 
             def __init__(self, config: Config):
                 super().__init__(config)
